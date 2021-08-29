@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <ol>
+        <introduce
+          v-for="trandan in users"
+          v-bind:key="trandan.key"
+          v-bind:trandan_name="trandan.name"
+          v-bind:trandan_action="trandan.action"
+        ></introduce>
+      </ol>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    Vue.component("introduce", {
+      props: ["trandan_name", "trandan_action"],
+      template: " <li> <b>{{trandan_name}}</b> noi la: {{trandan_action}}</li>",
+    });
+    var app = new Vue({
+      el: "#app",
+      data: {
+        message: "hello vue composing",
+        users: [
+          {
+            key: 1,
+            name: "tran dan",
+            action: "con card",
+          },
+          {
+            key: 2,
+            name: "tran dan",
+            action: "vo van hoa",
+          },
+          {
+            key: 3,
+            name: "tran dan",
+            action: "tau ban may do",
+          },
+        ],
+      },
+    });
+  </script>
+</html>
