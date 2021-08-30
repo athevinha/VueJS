@@ -7,3 +7,5 @@ If you’d like to learn more about Vue before diving in, we created a video wal
 <br/>
 <br/>
 If you are an experienced frontend developer and want to know how Vue compares to other libraries/frameworks, check out the Comparison with Other Frameworks.
+
+<img src="https://vuejs.org/images/lifecycle.png"></img>
