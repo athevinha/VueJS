@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{raw_html}}</p>
+      <!-- => <h1 style="color: red">red color</h1> -->
+      <p v-html="raw_html"></p>
+      <!-- => red color -->
+      <div v-bind:id="'list-' + name"></div>
+
+      <!-- <-------Agruments---- -->
+      <a v-bind:href="'https://envgame.online'">envgame</a>
+      <button v-on:click="click_btn">{{val_but}}</button>
+
+      <form v-on:submit.prevent="notLoadedPage">
+        <input v-bind:type="'submit'" value="submit don't refresh page" />
+      </form>
+      <form v-on:submit.="notLoadedPage">
+        <input v-bind:type="'submit'" value="submit refresh page" />
+      </form>
+      <!-- <-------Short Hand---- -->
+      <button @click="short_func">{{val_but}}</button>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        name: "tran dan",
+        a: "vo van hoa",
+        raw_html: "<h1 style='color:red'>red color</h1>",
+        val_but: "click event",
+      },
+      methods: {
+        click_btn: function () {
+          this.val_but = "you have click";
+        },
+        notLoadedPage: function () {
+          console.log("no loaded page");
+        },
+        short_func: function () {
+          this.val_but = "short";
+        },
+      },
+    });
+  </script>
+</html>
