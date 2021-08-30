@@ -7,17 +7,50 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="YN">
+      Give me a question
+    </br>
+      <input v-model="question" id="question" />
+      <br />
+      Bot will answer you 😘 by yes or no <br/>
+      <b>Notification:</b> {{notification}}
+      <br/>
+      <img v-bind:src="img_url"></img>
+    </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
   <script>
     var vm = new Vue({
-      el: "#app",
+      el: "#YN",
       data: {
-        name: "Tran Dan",
-        input: "Change this text and look at console",
+        question: "",
+        notification:"...",
+        img_url:""
+      },
+      watch:{
+        question:function(){
+          this.wait()
+          this.count = 0
+        }
+      },
+      created:function(){
+        this.wait = _.debounce(this.find_result,1000);
+      },
+      methods: {
+        find_result:function(){
+          if(this.question.includes("?")){
+            axios.get('https://yesno.wtf/api').then((res)=>{
+              this.notification = res.data.answer;
+              this.img_url = res.data.image            
+          })
+          }
+          else{
+            this.notification="Question may be have a '?' push ? into your question 😀"
+          }
+        
+        },
       },
     });
   </script>
