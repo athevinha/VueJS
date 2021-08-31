@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div v-bind:class="name" v-if="status">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus natus
+        corrupti quidem ipsum itaque asperiores. Sunt, repudiandae! Repudiandae
+        necessitatibus error mollitia sint sunt dolorem deserunt natus commodi,
+        expedita ipsa quod!
+      </div>
+      <!-- <div v-else-if="....">
+        Hiden text....<br />
+        click button to show text
+      </div> -->
+      <div v-else>
+        Hiden text....<br />
+        click button to show text
+      </div>
+      <button v-on:click="toogle">Show / hide button</button>
+
+      <h1 v-show="show">
+        V-show toogle! use 'vm.show = false' in console to hide this text
+      </h1>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    Vue.component("trandan_components", {
+      template: "<span v-bind:class='{trandan:true}'>Components class</span>",
+    });
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        name: "Tran Dan ! Co van toi cao",
+        status: true,
+        show: true,
+      },
+      methods: {
+        toogle: function () {
+          this.status = !this.status;
+        },
+      },
+    });
+  </script>
+</html>

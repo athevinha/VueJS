@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="TODO">
+      <form v-on:submit.prevent="add_todo_new">
+        <input type="text" v-model="todo_new" />
+        <input type="submit" value="submit" />
+        <ul>
+        <li
+          is="todo_item"
+          v-for="(todo,index) in todo_list"
+          v-bind:title="todo.title"
+          v-bind:id="todo.id +1"
+          v-bind:key="index"
+          v-on:remove="remove(index)"
+        ></li>
+        <ul>
+      </form>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+  <script>
+    Vue.component("todo_item", {
+      props: ["title", "id"],
+      template:
+        "<li>{{id + ' ' +title}} <button v-on:click='$emit(\"remove\")'> Remove</button> </li>",
+    });
+    var vm = new Vue({
+      el: "#TODO",
+      data: {
+        todo_list: [
+          {
+            id: 0,
+            title: "this is todo list",
+          },
+        ],
+        next_id: 1,
+        todo_new: "",
+      },
+      methods: {
+        add_todo_new: function () {
+          this.todo_list.push({ id: this.next_id, title: this.todo_new });
+          this.next_id++;
+          this.todo_new = "";
+        },
+        remove: function (index) {
+          console.log(index);
+          this.todo_list.splice(index, 1);
+        },
+      },
+    });
+  </script>
+</html>
